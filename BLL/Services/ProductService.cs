@@ -16,9 +16,9 @@ namespace BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<PaginatedResult<ProductDto>> GetAllAsync(int page, int pageSize)
+        public async Task<PaginatedResult<ProductDto>> GetAllAsync(int page, int pageSize, string? sortBy = null, string? sortOrder = null)
         {
-            var (Products, totalCount) = await _productRepository.GetPaginatedAsync(page, pageSize);
+            var (Products, totalCount) = await _productRepository.GetPaginatedAsync(page, pageSize, sortBy, sortOrder);
             return new PaginatedResult<ProductDto>
             {
                 Items = _mapper.Map<IEnumerable<ProductDto>>(Products),
